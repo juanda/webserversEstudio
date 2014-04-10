@@ -4,7 +4,8 @@
   vars:            
     sys_packages:  
       - acl    
-      - vim              
+      - vim  
+      - default-jdk          
     php_packages:      
       - { name: pear, package: php-pear }
       #- { name: xdebug, package: php5-xdebug }
@@ -23,6 +24,7 @@
       - { name: sgsd, path: /var/www/sgsd }          
   roles:
     - init
+    - perfmon
     - yaws    
     - php5    
     - symfony_apps

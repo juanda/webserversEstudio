@@ -1,0 +1,7 @@
+---
+
+- name: create dir /home/vagrant/ServerAgent
+  file: dest=/home/vagrant/ServerAgent state=directory owner=vagrant mode=0755
+
+- name: unarchive ServerAgent-2.2.1.zip
+  unarchive: src=ServerAgent-2.2.1.zip dest=/home/vagrant/ServerAgent

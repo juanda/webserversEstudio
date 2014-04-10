@@ -8,7 +8,7 @@
   template: src=phpinfo.tpl dest=/home/vagrant/www/info.php mode=0644
 
 - name: create apc.php
-  template: src=apc.tpl dest=/home/vagrant/www/apc.php mode=0644
+  template: src=apc.php dest=/home/vagrant/www/apc.php mode=0644
 
 #- name: Set doc_root cgi
 #  sudo: yes
