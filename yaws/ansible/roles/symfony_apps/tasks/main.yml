@@ -1,0 +1,20 @@
+---
+
+- name: deploy sf app
+  sudo: yes
+  unarchive: src=colabora.tgz dest=/home/vagrant
+
+- name: Set database connection
+  sudo: yes
+  template: src=parameters.tpl dest=/home/vagrant/colabora/app/config/parameters.yml owner=vagrant mode=0644
+
+- name: set permissions to cache and logs
+  sudo: yes
+  command: setfacl -R -m u:www-data:rwX -m u:vagrant:rwX /home/vagrant/colabora/app/cache /home/vagrant/colabora/app/logs
+
+- name: set permissions to cache and logs 2
+  sudo: yes
+  command: setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX /home/vagrant/colabora/app/cache /home/vagrant/colabora/app/logs
+
+- name: install assets
+  command: php /home/vagrant/colabora/app/console assets:install /home/vagrant/colabora/web --symlink

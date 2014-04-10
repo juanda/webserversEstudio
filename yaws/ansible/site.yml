@@ -1,0 +1,29 @@
+---
+- hosts: all
+  sudo:  true
+  vars:            
+    sys_packages:  
+      - acl    
+      - vim              
+    php_packages:      
+      - { name: pear, package: php-pear }
+      #- { name: xdebug, package: php5-xdebug }
+      - { name: curl, package: php5-curl }
+      - { name: mcrypt, package: php5-mcrypt }
+      - { name: mysql, package: php5-mysql }
+      - { name: mysql, package: php5-cli }
+      - { name: mysql, package: php5-cgi }
+      - { name: mysql, package: php5-json }
+      - { name: mysql, package: php5-intl }
+      - { name: mysql, package: php5-sqlite }
+      - { name: mysql, package: php5-xmlrpc }
+      - { name: mysql, package: php5-gd }
+      - { name: apc, package: php-apc }      
+    symfony_apps:
+      - { name: sgsd, path: /var/www/sgsd }          
+  roles:
+    - init
+    - yaws    
+    - php5    
+    - symfony_apps
+
