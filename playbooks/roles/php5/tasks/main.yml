@@ -1,0 +1,18 @@
+---
+- name: Create dir /home/vagrant/www
+  file: dest=/home/vagrant/www state=directory
+
+- name: Install PHP packages
+  sudo: yes
+  apt:  package={{ item.package }} state=latest
+  with_items: php_packages
+  
+- name: create info.php
+  template: src=phpinfo.tpl dest=/home/vagrant/www/info.php mode=0644
+
+- name: create apc.php
+  template: src=apc.php dest=/home/vagrant/www/apc.php mode=0644
+
+- name: Set date.timezone cli
+  sudo: yes
+  lineinfile: dest=/etc/php5/cli/php.ini regexp="^date.timezone" line="date.timezone=Europe/Madrid"

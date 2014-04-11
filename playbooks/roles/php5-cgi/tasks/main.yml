@@ -1,14 +1,6 @@
----
 - name: Install PHP packages
   sudo: yes
-  apt:  package={{ item.package }} state=latest
-  with_items: php_packages
-  
-- name: create info.php
-  template: src=phpinfo.tpl dest=/home/vagrant/www/info.php mode=0644
-
-- name: create apc.php
-  template: src=apc.php dest=/home/vagrant/www/apc.php mode=0644
+  apt:  package=php5-cgi state=latest  
 
 #- name: Set doc_root cgi
 #  sudo: yes
@@ -44,9 +36,4 @@
   
 - name: Set memory_limit cgi
   sudo: yes
-  lineinfile: dest=/etc/php5/cgi/php.ini regexp="^memory_limit" line="memory_limit = 256M"
-  notify: restart yaws
-
-- name: Set date.timezone cli
-  sudo: yes
-  lineinfile: dest=/etc/php5/cli/php.ini regexp="^date.timezone" line="date.timezone=Europe/Madrid"
+  lineinfile: dest=/etc/php5/cgi/php.ini regexp="^memory_limit" line="memory_limit = 256M"  

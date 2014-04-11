@@ -10,11 +10,11 @@
 
 - name: set permissions to cache and logs
   sudo: yes
-  command: setfacl -R -m u:www-data:rwX -m u:vagrant:rwX /home/vagrant/colabora/app/cache /home/vagrant/colabora/app/logs
+  command: setfacl -R -m u:{{webserver_user}}:rwX -m u:vagrant:rwX /home/vagrant/colabora/app/cache /home/vagrant/colabora/app/logs
 
 - name: set permissions to cache and logs 2
   sudo: yes
-  command: setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX /home/vagrant/colabora/app/cache /home/vagrant/colabora/app/logs
+  command: setfacl -dR -m u:{{webserver_user}}:rwX -m u:vagrant:rwX /home/vagrant/colabora/app/cache /home/vagrant/colabora/app/logs
 
 - name: install assets
   command: php /home/vagrant/colabora/app/console assets:install /home/vagrant/colabora/web --symlink

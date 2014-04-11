@@ -1,0 +1,18 @@
+[webservers]
+yaws_cgi ansible_ssh_host=192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant webserver_user=yaws tipoCgi=cgi
+yaws_fastcgi ansible_ssh_host=192.168.33.20 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant webserver_user=yaws tipoCgi=fpm
+nginx_fastcgi ansible_ssh_host=192.168.33.30 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant 
+apache_fastcgi ansible_ssh_host=192.168.33.40 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+apache_phpmodule ansible_ssh_host=192.168.33.50 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[yaws]
+yaws_cgi
+yaws_fastcgi
+
+[cgi]
+yaws_cgi
+
+[fastcgi]
+yaws_fastcgi
+nginx_fastcgi
+apache_fastcgi

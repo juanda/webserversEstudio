@@ -1,0 +1,40 @@
+- name: Install PHP packages
+  sudo: yes
+  apt:  package=php5-fpm state=latest  
+
+#- name: Set doc_root fpm
+#  sudo: yes
+#  lineinfile: dest=/etc/php5/fpm/php.ini regexp="^doc_root" line="doc_root=/home/vagrant"
+
+- name: Set cgi.force_redirect fpm
+  sudo: yes
+  lineinfile: dest=/etc/php5/fpm/php.ini regexp="^cgi.force_redirect" line="cgi.force_redirect=0"
+
+- name: Set register_globals fpm
+  sudo: yes
+  lineinfile: dest=/etc/php5/fpm/php.ini regexp="^register_globals" line="register_globals=Off"
+
+- name: Set session.auto_start fpm
+  sudo: yes
+  lineinfile: dest=/etc/php5/fpm/php.ini regexp="^session.auto_start" line="session.auto_start=Off"
+
+- name: Set magic_quotes_gpc fpm
+  sudo: yes
+  lineinfile: dest=/etc/php5/fpm/php.ini regexp="^magic_quotes_gpc" line="magic_quotes_gpc=Off"
+
+- name: Set date.timezone fpm
+  sudo: yes
+  lineinfile: dest=/etc/php5/fpm/php.ini regexp="^date.timezone" line="date.timezone=Europe/Madrid"
+
+- name: Set upload_max_filesize
+  sudo: yes
+  lineinfile: dest=/etc/php5/fpm/php.ini regexp="^upload_max_filesize" line="upload_max_filesize = 30M"
+  
+- name: Set post_max_size fpm
+  sudo: yes
+  lineinfile: dest=/etc/php5/fpm/php.ini regexp="^post_max_size" line="post_max_size = 30M"
+  
+- name: Set memory_limit fpm
+  sudo: yes
+  lineinfile: dest=/etc/php5/fpm/php.ini regexp="^memory_limit" line="memory_limit = 256M"
+  notify: restart php5-fpm

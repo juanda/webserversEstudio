@@ -1,11 +1,12 @@
 ---
-- hosts: all
+- hosts: webservers
   sudo:  true
   vars:            
     sys_packages:  
       - acl    
       - vim  
-      - default-jdk          
+      - default-jdk  
+      - unzip        
     php_packages:      
       - { name: pear, package: php-pear }
       #- { name: xdebug, package: php5-xdebug }
@@ -13,19 +14,34 @@
       - { name: mcrypt, package: php5-mcrypt }
       - { name: mysql, package: php5-mysql }
       - { name: mysql, package: php5-cli }
-      - { name: mysql, package: php5-cgi }
       - { name: mysql, package: php5-json }
       - { name: mysql, package: php5-intl }
       - { name: mysql, package: php5-sqlite }
       - { name: mysql, package: php5-xmlrpc }
       - { name: mysql, package: php5-gd }
       - { name: apc, package: php-apc }      
-    symfony_apps:
-      - { name: sgsd, path: /var/www/sgsd }          
+              
   roles:
     - init
-    - perfmon
-    - yaws    
-    - php5    
-    - symfony_apps
+    - perfmon    
+    - php5        
 
+- hosts: yaws
+  sudo: true
+  roles:
+    - yaws
+
+- hosts: cgi
+  sudo: true
+  roles:
+    - php5-cgi
+
+- hosts: fastcgi
+  sudo: true
+  roles:
+    - php5-fpm
+
+- hosts: webservers
+  sudo: true
+  roles:
+    - symfony_apps
