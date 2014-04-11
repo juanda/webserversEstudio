@@ -27,9 +27,14 @@
     - php5        
 
 - hosts: yaws
-  sudo: true
+  sudo: true  
   roles:
     - yaws
+
+- hosts: nginx
+  sudo: true
+  roles:
+    - nginx
 
 - hosts: cgi
   sudo: true
