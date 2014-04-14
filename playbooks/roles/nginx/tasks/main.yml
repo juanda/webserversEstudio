@@ -12,4 +12,12 @@
     sudo: yes
     template: src=symfony.tpl dest=/etc/nginx/sites-available/symfony
     notify: restart nginx
+  
+  - name: enable default site
+    sudo: yes
+    file: src=/etc/nginx/sites-available/default dest=/etc/nginx/sites-enabled/default state=link
+
+  - name: enable symfony site
+    sudo: yes
+    file: src=/etc/nginx/sites-available/symfony dest=/etc/nginx/sites-enabled/symfony state=link
 

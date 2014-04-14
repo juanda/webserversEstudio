@@ -36,6 +36,21 @@
   roles:
     - nginx
 
+- hosts: apache
+  sudo: true
+  roles: 
+    - apache
+
+- hosts: apache_phpmodule
+  sudo: true
+  roles: 
+    - apache-php-mod
+
+- hosts: apache_fastcgi
+  sudo: true
+  roles: 
+    - apache-fastcgi
+
 - hosts: cgi
   sudo: true
   roles:

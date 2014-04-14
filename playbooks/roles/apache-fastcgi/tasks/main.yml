@@ -1,0 +1,9 @@
+- name: Install apache fastcgi module
+  sudo: yes
+  apt:  package=libapache2-mod-fastcgi state=latest
+  notify: restart apache2
+
+- name: Enable mod actions
+  sudo: yes
+  command: a2enmod actions
+  notify: restart apache2

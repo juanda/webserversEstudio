@@ -1,0 +1,26 @@
+- name: Install apache
+  sudo: yes
+  apt:  pkg=apache2 state=latest
+
+- name: Change default apache site
+  sudo: yes
+  template: src=default dest=/etc/apache2/sites-available/default
+  notify: restart apache2
+
+- name: Symfony apache site
+  sudo: yes
+  template: src=symfony dest=/etc/apache2/sites-available/symfony
+  notify: restart apache2
+
+#- name: enable default site
+#  sudo: yes
+#  file: src=/etc/apache2/sites-available/default dest=/etc/apache2/sites-enabled/default state=link
+
+- name: enable symfony site
+  sudo: yes
+  file: src=/etc/apache2/sites-available/symfony dest=/etc/apache2/sites-enabled/symfony state=link
+
+- name: Listen on 8080
+  sudo: yes
+  template: src=ports.conf dest=/etc/apache2/ports.conf
+  notify: restart apache2
